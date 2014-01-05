@@ -31,6 +31,8 @@ class ManagerTestCase(TestCase):
         backend = connections['default'].get_backend()
         backend.clear()
         backend.update(self.search_index(), MockModel.objects.all())
+        ui = connections['default'].get_unified_index()
+        ui.build([BasicMockModelSearchIndex(), BasicAnotherMockModelSearchIndex()])
 
         self.search_queryset = BasicMockModelSearchIndex.objects.all()
 
